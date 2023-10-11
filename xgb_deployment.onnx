@@ -101,6 +101,21 @@ initial_types=([(
 onnx_model = onnxmltools.convert_xgboost( reg, initial_types=initial_types)
 onnxmltools.utils.save_model(onnx_model, 'xgboost_winequality_ort.onnx')
 
+#set up onnx run time session
+sess = rt.InferneceSession('xgboost_winequality_ort.onnx')
+input_name = sess.get_inputs()[0].name
+print(input_name)     //floatinput
+label_name = sess.get_outputs()[0].name
+print(label_name)
+
+#create predictions and take from xtest
+pred_ort = sess.run( [label_name], {input_name: X_test.astype(np.float32)} )
+print(pred_ort[0])
+
+
+
+
+
 
 model = xgb.XGBRegressor(n_estimators=325,
                         reg_lambda=1,
