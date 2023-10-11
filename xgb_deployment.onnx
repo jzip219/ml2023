@@ -80,7 +80,28 @@ torch.onnx.export(
     output_names=output_names
 )
 
-#XGBoost
+#Deploy XGBoost Model -- .ipynb
+import onnxruntime as rt
+from skl2onnx.common.data_types import FloatTensor
+import onnxmltools
+import mlxtend
+
+#pip install onnxmltools
+#onnxruntime
+#mlxtend
+
+#especial for ORT
+initial_types=([(
+      'float_input',
+      FLoatTensorType( [None, 11] )
+
+)])
+
+#convert the model
+onnx_model = onnxmltools.convert_xgboost( reg, initial_types=initial_types)
+onnxmltools.utils.save_model(onnx_model, 'xgboost_winequality_ort.onnx')
+
+
 model = xgb.XGBRegressor(n_estimators=325,
                         reg_lambda=1,
                         gamma=0,
