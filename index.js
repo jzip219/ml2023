@@ -1,7 +1,7 @@
 
 async function float32array()
 
-  var x = new float32array(1,11)
+  var x = []; //new float32array(1,11)
 
   x[0] = document.getElementById('box1').value;
   x[1] = document.getElementById('box2').value;
@@ -15,7 +15,7 @@ async function float32array()
   x[9] = document.getElementById('box10').value;
   x[10] = document.getElementById('box11').value;
 
-  let tensorX = new onnx.Tensor(x, float32, [1,11]);
+  let tensorX = new onnx.Tensor(x, 'float32', [1,11]);
   
   let session = new onnx.InferenceSession();
   await session.loadModel("./xgb_deployment.onnx");
