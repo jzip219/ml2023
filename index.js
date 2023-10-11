@@ -23,7 +23,7 @@ async function float32array()
   let outputData = outputMap.get('output1')
   
   let predictions = document.getElementById('predictions');
-#backtick
+//backtick
 predictions.innerHTML=`<hr> Got an output tensor with values:</br>
   <table>
     <tr>
@@ -32,5 +32,5 @@ predictions.innerHTML=`<hr> Got an output tensor with values:</br>
     </tr>
   </table>;
 
-`;
+`;//endbacktick
 
