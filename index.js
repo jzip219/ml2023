@@ -15,11 +15,22 @@ async function float32array()
   x[9] = document.getElementById('box10').value;
   x[10] = document.getElementById('box11').value;
 
-let tensorX = new onnx.Tensor(x, float32, [1,11]);
+  let tensorX = new onnx.Tensor(x, float32, [1,11]);
+  
+  let session = new onnx.InferenceSession();
+  await session.loadModel("./xgb_deployment.onnx");
+  let outputMap = await session.run([tensorX]);
+  let outputData = outputMap.get('output1')
+  
+  let predictions = document.getElementById('predictions');
+#backtick
+predictions.innerHTML=`<hr> Got an output tensor with values:</br>
+  <table>
+    <tr>
+      <td> Quality Rating </td>
+      <td id='table0'> ${outputData.data[0].toFixed(2)} </td>
+    </tr>
+  </table>;
 
-let session = new onnx.InferenceSession();
-await session.loadModel("./xgb_deployment.onnx");
-let outputMap = await session.run([tensorX]);
-let outputData = outputMap.get('output1')
+`;
 
-let predictions = document.getElementById('predictions');
