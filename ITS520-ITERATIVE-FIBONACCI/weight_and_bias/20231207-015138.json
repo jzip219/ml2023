@@ -1,0 +1,10 @@
+{
+    "datapoints": 200,
+    "learn_rate": 0.001,
+    "epochs": 400000,
+    "weight": NaN,
+    "bias": NaN,
+    "equation": "y = w * x + b",
+    "x": 21,
+    "y": NaN
+}
